@@ -1,0 +1,6 @@
+{
+  "name": "DSP Academy Coaching CRM",
+  "description": "High-conversion Coaching CRM for DSP Academy with sales pipeline, lead qualification, staff accountability, revenue tracking, and student operations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

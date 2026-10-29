@@ -1,0 +1,1207 @@
+# MASTER BUILD PROMPT: DSP ACADEMY COACHING CRM
+## Google AI Studio → GitHub → Vercel → Supabase
+
+### 1. YOUR ROLE AND MISSION
+
+Act as a senior full-stack software architect, product designer, CRM systems engineer, database architect, security engineer, and conversion optimization specialist.
+
+Your task is to transform the attached HTML prototype into a complete, production-oriented CRM web application for DSP Academy / Digital Success Place Academy (DSP Academy).
+
+This is not a request to generate a static dashboard, a landing page, or a visual mockup. Build a functional business application with persistent data, secure authentication, role-based access control, lead management, sales conversion workflows, staff activity tracking, student management, financial tracking, analytics, and automation.
+
+You must first inspect the attached file:
+
+**`dsp_coaching_crm_ui.html`**
+
+Treat this file as the primary visual reference for the application's design, layout, spacing, colors, component arrangement, typography, dashboard composition, and interaction patterns.
+
+Reproduce the existing design as faithfully as possible while making the necessary architectural improvements for a real CRM.
+
+Do not replace the reference design with a generic SaaS template. Do not simplify it into a basic admin dashboard. Do not discard its visual identity.
+
+Where the reference contains nonfunctional controls, implement real functionality behind them. Where the reference displays illustrative data, replace it with live Supabase data in the completed application.
+
+The final product must be suitable for deployment through Vercel and ongoing development through GitHub.
+
+---
+
+### 2. BUSINESS CONTEXT
+
+The application is the DSP Academy Coaching CRM.
+
+DSP Academy operates training and coaching programs and needs a centralized system for managing prospects, sales, students, staff, activities, programs, payments, and business performance.
+
+The CRM has four primary objectives:
+
+1. Increase the percentage of qualified prospects who become paying students.
+2. Ensure every lead, sales opportunity, task, and follow-up has clear ownership and an appropriate next action.
+3. Track staff activities, performance, workload, responsibilities, and outcomes.
+4. Give management a reliable, real-time view of sales, marketing, revenue, enrollment, and coaching operations.
+
+The CRM should be designed around business processes rather than merely database records.
+
+It should be neat and easy to use, visually clean, operationally deep, conversion-focused, secure, and scalable.
+
+The initial application should support sales and coaching operations while providing a sound foundation for future features.
+
+---
+
+### 3. MANDATORY TECHNOLOGY STACK
+
+Use the following stack.
+
+**Frontend**
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Lucide icons or a consistent compatible icon library
+- Reusable, typed UI components
+- Responsive layouts for desktop, tablet, and mobile
+
+**Backend and database**
+- Supabase PostgreSQL
+- Supabase Auth
+- Supabase Row Level Security (RLS)
+- Supabase SQL migrations
+- Supabase Storage only where necessary
+- Secure server-side functions for privileged operations and business-critical workflows
+
+**Development and deployment**
+- Google AI Studio for application development and refinement
+- GitHub for source control and version management
+- Vercel for deployment
+- Supabase for production data and authentication
+
+Use the current, supported integration methods available in the development environment.
+
+Do not introduce an unnecessary second backend, a separate database, or an unrelated framework.
+
+If a backend operation requires server-side execution, use an appropriate Supabase Edge Function or another supported server-side mechanism. Never implement privileged operations solely in browser code.
+
+Keep the architecture compatible with Vercel deployment.
+
+---
+
+### 4. BRAND IDENTITY — STRICT REQUIREMENTS
+
+These brand specifications are mandatory.
+
+Primary button and highlight color: `#47e802`
+
+Application background: `#f5f2e8`
+
+Primary text color: `#000000`
+
+The application must follow these rules:
+
+- All primary text must be black.
+- Primary action buttons must use `#47e802`.
+- Text highlights, selected navigation indicators, active states, progress indicators, and important accents should use `#47e802`.
+- The main application canvas must use `#f5f2e8`.
+- Use clean white or subtly differentiated light surfaces for cards, tables, dialogs, and panels.
+- Use restrained borders, subtle shadows, and consistent corner radii.
+- Keep the interface premium, minimal, organized, and professional.
+- Avoid unnecessary gradients, decorative illustrations, excessive animation, or visual clutter.
+- Do not introduce an alternative primary brand color.
+- Use readable font sizes, strong visual hierarchy, and consistent spacing.
+- Ensure the bright green remains readable with black text.
+
+Use centralized design tokens so these values can be maintained consistently across the entire application.
+
+Example design tokens:
+
+```css
+:root {
+  --brand-primary: #47e802;
+  --app-background: #f5f2e8;
+  --text-primary: #000000;
+  --surface-primary: #ffffff;
+}
+```
+
+Use these tokens throughout the interface rather than repeating arbitrary color values in individual components.
+
+The final application must visually resemble the attached prototype, not merely use the same colors.
+
+---
+
+### 5. VISUAL REFERENCE AND DESIGN PRESERVATION
+
+Before writing application code, inspect the attached HTML file thoroughly.
+
+Identify and preserve the following visual elements:
+
+1. Brand and application header.
+2. Left sidebar navigation.
+3. Top search bar and user profile area.
+4. Dashboard welcome section and date filter.
+5. KPI summary cards.
+6. Sales pipeline visualization.
+7. Lead-source visualization.
+8. Revenue growth chart.
+9. Recent leads table.
+10. Today's tasks panel.
+11. Active coaching programs section.
+12. Today's schedule panel.
+13. Team activity panel.
+14. Support or help area where appropriate.
+15. Responsive layout behavior.
+
+Preserve the reference's overall proportions, card density, alignment, whitespace, navigation structure, and restrained styling.
+
+You may refactor the original HTML into proper React components. You must not simply embed the original HTML inside an iframe or leave the application as a static HTML document.
+
+Use the original file as the visual specification and rebuild the interface using maintainable React components.
+
+Where exact design details are available in the file, follow them. Do not invent a completely different interface.
+
+If the original file contains hardcoded example data, preserve its visual presentation while replacing the data source with live application records.
+
+---
+
+### 6. APPLICATION ARCHITECTURE
+
+Build the application as a modular CRM with clearly separated functional areas.
+
+The primary navigation should include:
+
+- Dashboard
+- Leads
+- Contacts
+- Programs
+- Sales Pipeline
+- Clients / Students
+- Sessions
+- Tasks
+- Team
+- Reports
+- Automations
+- Settings
+
+Finance functionality should be accessible to authorized users, either as a dedicated navigation item or within the appropriate operational workspace.
+
+Keep the visual navigation faithful to the reference while ensuring all implemented destinations have working pages.
+
+Do not create navigation items that lead to blank screens, placeholder pages, or nonfunctional buttons.
+
+Each major module should have its own components, data access functions, types, validation rules, and business logic.
+
+Keep the code organized by feature rather than putting the entire application into one oversized component.
+
+A suggested project structure is:
+
+```text
+src/
+  app/
+    App.tsx
+    router.tsx
+    providers/
+  components/
+    layout/
+    navigation/
+    dashboard/
+    tables/
+    forms/
+    dialogs/
+    charts/
+    feedback/
+  features/
+    auth/
+    dashboard/
+    contacts/
+    leads/
+    pipeline/
+    activities/
+    tasks/
+    programs/
+    enrollments/
+    students/
+    coaching/
+    finance/
+    team/
+    reports/
+    automations/
+    settings/
+  lib/
+    supabase/
+    permissions/
+    validation/
+    formatting/
+  services/
+  hooks/
+  types/
+  utils/
+  styles/
+supabase/
+  migrations/
+  functions/
+```
+
+This structure is a guide, not a reason to create unnecessary abstraction. Keep the application maintainable and consistent.
+
+---
+
+### 7. AUTHENTICATION AND ACCESS CONTROL
+
+Implement real Supabase authentication.
+
+The application must include:
+
+- A polished sign-in screen consistent with the brand.
+- Session persistence through supported Supabase Auth mechanisms.
+- Secure logout.
+- Loading, error, and unauthorized states.
+- Protected application routes.
+- User profile management.
+- Role-based navigation and permissions.
+- Server-enforced authorization for sensitive actions.
+
+Define the initial roles as:
+
+**Super Admin / Owner**
+- Access to all authorized business modules.
+- Manage staff, permissions, configuration, and reporting.
+- View financial information.
+- Review audit logs.
+- Approve sensitive actions.
+
+**Sales Manager**
+- View and manage the sales pipeline.
+- Assign and reassign leads.
+- Monitor salesperson performance.
+- Review follow-ups and overdue tasks.
+- Access authorized sales reports.
+
+**Salesperson / Customer Care**
+- View assigned leads and authorized shared records.
+- Record conversations and sales activities.
+- Manage assigned follow-ups.
+- Update permitted pipeline stages.
+- Create tasks and record outcomes.
+
+**Growth Marketing**
+- Manage or review acquisition-source data.
+- Analyze campaign performance and lead quality.
+- Access authorized marketing reports.
+
+**Coach / Instructor**
+- View assigned students.
+- Manage permitted sessions, attendance, and progress records.
+- Record coaching notes within the appropriate access boundaries.
+
+**Operations / Student Success**
+- Manage enrollment, onboarding, student support, and permitted student records.
+
+**Finance Officer**
+- Review transactions.
+- Reconcile payments.
+- Manage authorized invoices, payment schedules, refunds, and financial reports.
+
+**Read-only Analyst**
+- View permitted reports without modifying operational records.
+
+Allow administrators to assign multiple roles where necessary.
+
+Implement permissions as a maintainable permission system. Do not rely solely on hiding UI elements.
+
+Every sensitive operation must also be protected on the server or through PostgreSQL RLS policies.
+
+Never expose the Supabase service-role key, privileged credentials, or other secrets in browser code.
+
+---
+
+### 8. CORE DATA MODEL
+
+Design a normalized PostgreSQL schema before implementing the operational modules.
+
+Use UUID primary keys, appropriate foreign keys, timestamps, constraints, and indexes.
+
+Include the following core entities, adapting the final schema where justified by normalization and business requirements.
+
+**Identity and staff**
+- profiles
+- staff_roles
+- teams, if required
+- permissions or a role-permission mapping
+- staff_targets
+
+**Contacts and acquisition**
+- contacts
+- lead_sources
+- marketing_campaigns
+- attribution_events
+- qualification_responses, or an equivalent structured response model
+
+**Sales and pipeline**
+- opportunities
+- pipeline_stages
+- opportunity_assignments, if assignment history requires a separate table
+- activities
+- tasks
+- notes
+- offers
+- objection records, where separate records are useful
+
+**Programs and delivery**
+- programs
+- cohorts
+- enrollments
+- coach_assignments
+- coaching_sessions
+- attendance_records
+- learner_progress
+- support_cases
+
+**Finance**
+- invoices
+- payment_schedules
+- payments
+- refunds
+- reconciliation_records
+
+**Automation and governance**
+- workflow_rules
+- workflow_execution_logs
+- notification_events
+- audit_logs
+
+Do not create every listed table blindly. Establish the correct relationships and avoid redundant data.
+
+For example, do not store multiple copies of a contact's name and phone number across unrelated records when a foreign key is more appropriate.
+
+Use a consistent convention for table names, columns, timestamps, status values, and foreign keys.
+
+Create version-controlled SQL migrations for the schema.
+
+The application must be able to initialize a new Supabase project using the documented migrations rather than depending on undocumented manual database changes.
+
+---
+
+### 9. CONTACTS, LEADS, AND OPPORTUNITIES
+
+This distinction is fundamental.
+
+A **contact** represents a person.
+
+An **opportunity** represents a specific potential purchase or enrollment.
+
+One contact may have multiple opportunities for different programs or at different times.
+
+Do not create a new contact every time the same person enquires about a different course.
+
+#### Lead capture
+
+Support manual lead creation initially, with a design that can later accommodate integrated website forms, campaign integrations, and messaging channels.
+
+Capture relevant information:
+
+- Full name
+- Phone number
+- WhatsApp number, where different
+- Email
+- Location
+- Occupation or business, where relevant
+- Acquisition source
+- Campaign and landing page, when available
+- Program of interest
+- Qualification information
+- Assigned salesperson
+- Lead creation date
+- Consent and contact preferences, where applicable
+
+Implement duplicate detection using normalized phone numbers and email addresses, with appropriate database constraints where feasible.
+
+Do not automatically merge records based on a weak match. Allow authorized staff to review potential duplicates.
+
+#### Opportunity records
+
+Each opportunity should support:
+
+- Contact reference
+- Program of interest
+- Current stage
+- Assigned owner
+- Estimated value
+- Quoted price
+- Expected decision date
+- Last meaningful interaction
+- Next action
+- Next action due date
+- Qualification status
+- Lead temperature
+- Objections or blockers
+- Outcome and loss reason
+- Original source and relevant attribution data
+
+Provide a clean lead details page with a chronological activity timeline and convenient actions for recording calls, follow-ups, notes, offers, and status changes.
+
+---
+
+### 10. SALES PIPELINE AND CONVERSION LOGIC
+
+Implement a configurable sales pipeline.
+
+The initial stages should support:
+
+1. New Lead
+2. Contact Attempted
+3. Contact Established
+4. Qualified
+5. Offer Presented
+6. Follow-up / Decision Pending
+7. Payment Pending
+8. Won
+9. Lost
+10. Nurture
+
+Some stages can be adjusted to match the actual sales process. Nurture, Lost, and Won must be represented as distinct outcomes rather than confused with ordinary progress stages.
+
+Allow administrators to configure stage labels, ordering, active/inactive status, and transition rules where appropriate.
+
+Provide both a clear pipeline view and a practical list view.
+
+The pipeline should show meaningful information such as opportunity count, estimated value, stage, owner, and overdue follow-ups.
+
+#### Stage transition requirements
+
+When a salesperson attempts to change an opportunity's stage:
+
+- Validate the requested transition.
+- Enforce required fields.
+- Check permissions.
+- Record the actor and timestamp.
+- Preserve the previous stage in the audit history.
+- Create relevant tasks or workflow events when configured.
+- Prevent invalid or duplicate transitions.
+
+When marking an opportunity Lost, request an appropriate loss reason.
+
+When moving an opportunity to Payment Pending, record the relevant amount, due date, and payment arrangement where applicable.
+
+**A verbal promise to pay must never be treated as verified revenue or a completed enrollment.**
+
+Only authorized business logic should mark a transaction as verified and trigger the appropriate enrollment transition.
+
+Avoid destructive operations when an opportunity can be closed, archived, or marked inactive instead.
+
+---
+
+### 11. LEAD QUALIFICATION AND SCORING
+
+Build a structured qualification process that can be adapted to different coaching programs.
+
+Potential fields include:
+
+- Main goal
+- Current skill level
+- Problem to solve
+- Desired outcome
+- Relevant program
+- Intended start date
+- Budget or payment readiness
+- Preferred learning format
+- Prior training
+- Key objection
+- Qualification outcome
+
+Support conditional questions so the questionnaire can adapt to the selected program.
+
+Do not store all responses in an unstructured paragraph if they need to be filtered or analyzed.
+
+Implement a configurable lead scoring system.
+
+An initial illustrative scoring model is:
+
+- Program fit: 25%
+- Purchase readiness: 25%
+- Engagement and responsiveness: 20%
+- Urgency: 15%
+- Budget or payment readiness: 15%
+
+These weights must be configurable and treated as provisional until actual conversion data supports calibration.
+
+Display the score alongside the reasons contributing to it.
+
+Allow authorized staff to override a score with an explanation where necessary.
+
+Missing information must be treated as unknown, not automatically negative.
+
+The scoring system should prioritize follow-up and must not automatically reject a prospect.
+
+---
+
+### 12. ACTIVITIES, TASKS, AND STAFF ACCOUNTABILITY
+
+Implement a central activity ledger linked to contacts, opportunities, students, and staff where applicable.
+
+Activity types should include:
+
+- Call attempted
+- Call completed
+- WhatsApp conversation logged
+- Email sent
+- Follow-up scheduled
+- Follow-up completed
+- Meeting booked
+- Meeting attended
+- Meeting missed
+- Qualification completed
+- Offer presented
+- Payment verified
+- Enrollment completed
+- Note added
+- Task completed
+- Lead assigned or reassigned
+- Stage changed
+
+Every activity should record its actor, timestamp, related record, activity type, outcome, and notes where applicable.
+
+Differentiate between manually recorded activities and activities generated by verified integrations.
+
+Do not claim that a call, message, or email was actually sent merely because a staff member created a record for it.
+
+#### Task management
+
+Tasks should include:
+
+- Title
+- Description
+- Assignee
+- Creator
+- Due date and time
+- Priority
+- Status
+- Related contact or opportunity
+- Completion timestamp
+- Completion notes where useful
+
+Provide filters for assigned tasks, overdue tasks, completed tasks, priority, and date.
+
+Allow authorized managers to review workload and overdue responsibilities.
+
+#### Staff performance
+
+Measure both execution and results.
+
+Execution metrics:
+- Tasks completed on time
+- Overdue tasks
+- Follow-up completion
+- Response time
+- Data completeness
+
+Sales metrics:
+- Qualified leads handled
+- Conversion rate
+- Verified enrollments
+- Revenue collected
+- Average deal value
+- Sales-cycle duration
+
+Coaching metrics:
+- Student attendance
+- Session completion
+- Learner progress
+- Student engagement
+- Retention
+
+Use role-specific scorecards. Do not evaluate coaches using the same criteria as salespeople.
+
+Ensure performance reports account for lead ownership, time period, lead source, opportunity history, and differences in assigned workload.
+
+Maintain an audit trail for critical changes.
+
+---
+
+### 13. DASHBOARD IMPLEMENTATION
+
+Rebuild the attached dashboard as the main application landing page.
+
+Preserve the reference layout while making the displayed information dynamic.
+
+The dashboard should contain:
+
+**A. Header**
+- Welcome message
+- Global search
+- Notification control
+- User profile and role
+- Date-range filter
+
+**B. KPI cards**
+- Total leads
+- Consultations or qualified opportunities
+- Enrolled clients
+- Revenue collected
+
+Additional indicators may show percentage changes compared with a previous period when the underlying data supports a valid comparison.
+
+**C. Sales Pipeline**
+- Stage-by-stage lead or opportunity counts
+- Stage conversion indicators
+- A link to the full pipeline
+
+**D. Lead Sources**
+- Leads by acquisition channel
+- Source distribution
+- Links to relevant filtered records
+
+**E. Revenue Growth**
+- Revenue collected over time
+- A configurable date range
+- Accurate currency formatting
+
+**F. Recent Leads**
+- Name
+- Source
+- Program interest
+- Current stage
+- Assigned owner where layout permits
+- Creation date
+- Link to the lead profile
+
+**G. Today's Tasks**
+- Due tasks
+- Priority
+- Assignee
+- Completion controls
+- Overdue indicators
+
+**H. Active Programs**
+- Program name
+- Active student count
+- Relevant progress or engagement indicator
+
+**I. Today's Schedule**
+- Upcoming consultations and coaching sessions
+- Session time
+- Student or prospect
+- Session type
+
+**J. Team Activity**
+- Recent meaningful staff actions
+- Staff member
+- Action description
+- Timestamp
+- Link to the related record where possible
+
+Use the existing design as the primary layout specification.
+
+The dashboard must be role-aware. A salesperson should not automatically see every employee's private records or financial information. An owner should see broader business intelligence subject to their permissions.
+
+#### Dashboard calculations
+
+Calculate dashboard metrics from actual database records.
+
+Clearly distinguish:
+
+- New leads
+- Qualified opportunities
+- Active opportunities
+- Won opportunities
+- Verified enrollments
+- Amount invoiced
+- Cash collected
+- Outstanding balances
+
+Never calculate revenue from the number of Won opportunities or the sum of unverified payment promises.
+
+Document the definitions of all important metrics.
+
+Use correct date ranges, time zones, and comparison periods.
+
+If no data exists, display a useful empty state rather than fabricated figures.
+
+---
+
+### 14. SEARCH, FILTERS, TABLES, AND FORMS
+
+Implement reusable data-table and form patterns throughout the application.
+
+Required capabilities include:
+
+- Search
+- Sorting
+- Pagination
+- Filtering
+- Date-range selection
+- Status filtering
+- Owner filtering
+- Program filtering
+- Source filtering where relevant
+- Empty states
+- Loading states
+- Error states
+- Form validation
+- Confirmation dialogs for sensitive actions
+
+For lead and contact tables, support searching by relevant fields such as name, email, and phone number.
+
+Use server-side pagination and filtering for datasets that may grow substantially.
+
+Avoid fetching every record into the browser.
+
+All forms should have appropriate validation and clear error messages.
+
+Prevent duplicate submissions during network requests.
+
+For create and edit operations, show success or failure feedback only after the underlying operation returns an appropriate result.
+
+Ensure keyboard accessibility and clear focus states.
+
+---
+
+### 15. PROGRAMS, ENROLLMENT, AND STUDENT MANAGEMENT
+
+Build program management for the academy's training and coaching offerings.
+
+Each program should support:
+
+- Name
+- Description
+- Program type
+- Active status
+- Pricing configuration
+- Relevant cohort or schedule
+- Enrollment information
+
+The program model should support different course formats without assuming every program has the same structure.
+
+When a qualifying purchase is confirmed:
+
+1. Validate the opportunity and payment conditions.
+2. Confirm the relevant program and commercial terms.
+3. Create or update the appropriate enrollment.
+4. Preserve the contact and opportunity relationship.
+5. Record the conversion event.
+6. Create onboarding tasks or workflow events where configured.
+7. Notify authorized staff.
+8. Prevent duplicate enrollments caused by retries or repeated payment events.
+
+Student management should support:
+
+- Enrollment status
+- Program and cohort
+- Enrollment date
+- Assigned coach
+- Onboarding status
+- Sessions
+- Attendance
+- Progress updates
+- Support needs
+- Completion status
+
+Build the initial structure so it can integrate with the existing LearnWithDSP LMS later.
+
+Do not attempt to duplicate the entire LMS unless a specific requirement demands it.
+
+---
+
+### 16. FINANCE AND PAYMENT MANAGEMENT
+
+Implement financial records with clear separation between commercial commitments and verified money received.
+
+Support:
+
+- Program pricing
+- Approved discounts
+- Subsidized offers
+- Quotes or offers
+- Invoices
+- Payment schedules
+- Partial payments
+- Outstanding balances
+- Payment verification
+- Refunds
+- Reconciliation
+
+Each payment record should include relevant fields such as amount, currency, channel, transaction reference, status, recorded date, verification date, and verifying staff member where applicable.
+
+Support NGN and additional currencies where the business requires them.
+
+Do not assume that every payment uses the same currency.
+
+Manual bank-transfer verification must require an authorized user and a recorded verification event.
+
+Where a payment gateway is integrated, verify payment events through trusted server-side mechanisms rather than relying on a browser redirect.
+
+Implement idempotency so duplicate webhook deliveries cannot create duplicate financial records or enrollments.
+
+Refunds must require appropriate authorization and preserve the original payment history.
+
+Financial metrics must distinguish actual collections from invoiced amounts and projected revenue.
+
+---
+
+### 17. AUTOMATIONS AND NOTIFICATIONS
+
+Implement a foundational workflow architecture.
+
+Potential triggers include:
+
+- New lead created
+- Lead assigned
+- Follow-up becomes due
+- Task becomes overdue
+- Opportunity enters a configured stage
+- Offer presented
+- Payment deadline passes
+- Payment is verified
+- Enrollment is created
+- Student misses a configured attendance threshold
+
+Potential actions include:
+
+- Create a task
+- Notify an assigned staff member
+- Escalate an overdue item
+- Update an allowed workflow status
+- Create onboarding tasks
+- Send a communication through a configured provider
+
+For each workflow, support a trigger, conditions, action, execution status, and audit history.
+
+Make automation rules configurable where appropriate.
+
+Use retry-safe execution and prevent duplicate side effects.
+
+Do not send real messages until the relevant provider integration and authorization are configured.
+
+Respect communication consent, opt-outs, sending limits, and applicable privacy requirements.
+
+AI-generated summaries and recommendations must be identified as suggestions rather than verified facts.
+
+---
+
+### 18. REPORTS AND MANAGEMENT INTELLIGENCE
+
+Build a reporting foundation that supports:
+
+- Lead acquisition by source
+- Lead qualification
+- Pipeline distribution
+- Stage conversion
+- Lead-to-sale conversion
+- Staff performance
+- Sales-cycle duration
+- Revenue collected
+- Outstanding balances
+- Program performance
+- Student engagement
+- Enrollment and retention
+
+Define each metric consistently.
+
+For example:
+
+Lead-to-sale conversion should use a clearly defined cohort of unique leads and a defined purchase window. It should not divide this month's sales by this month's leads without accounting for the different dates on which leads entered the funnel.
+
+Stage conversion should be based on opportunities entering the relevant stage and their subsequent progression.
+
+Acquisition cost calculations should only be displayed when the required marketing-spend data and attribution methodology are available.
+
+Use accurate reporting queries and indexes.
+
+Do not create charts from fabricated values.
+
+Allow reports to be filtered by date, program, owner, team, source, and other relevant dimensions.
+
+Restrict exports to authorized roles.
+
+---
+
+### 19. SUPABASE SECURITY AND DATA INTEGRITY
+
+Security is mandatory from the beginning.
+
+Implement:
+
+- Supabase Auth
+- Row Level Security on every table containing protected application data
+- Least-privilege permissions
+- Server-side validation
+- Secure handling of privileged actions
+- Audit logs
+- Foreign-key constraints
+- Appropriate unique constraints
+- Database indexes
+- Safe transaction boundaries
+- Protected file access where storage is used
+- Error handling and operational logging
+
+RLS policies must enforce actual access rules, not merely assume users will interact through the intended UI.
+
+For example:
+
+- Sales staff should only access assigned or explicitly shared records according to policy.
+- Coaches should access the students and coaching records assigned to them.
+- Finance users should have only the financial access their role requires.
+- Administrative operations must be restricted to authorized users.
+
+Do not trust a role value supplied by the browser.
+
+Do not allow users to assign themselves administrative permissions.
+
+Create an appropriate administrative provisioning process.
+
+Ensure unauthenticated users cannot access private CRM records.
+
+Use secure server-side authorization for payment verification, refunds, privilege changes, and other sensitive operations.
+
+Avoid logging secrets or unnecessary personal information.
+
+---
+
+### 20. GITHUB AND VERCEL READINESS
+
+The application must be suitable for a real GitHub repository and Vercel deployment.
+
+Requirements:
+
+- Standard React + TypeScript + Vite project configuration.
+- Reproducible dependency installation.
+- Correct build scripts.
+- Environment variable documentation.
+- No committed secrets.
+- No dependency on development-only local state for production behavior.
+- Clear separation between public and privileged configuration.
+- Production build must pass.
+- Application routes must work after refresh.
+- Protected routes must remain protected.
+- Database migrations must be version-controlled.
+- Any server-side functions must have clear deployment instructions.
+
+Create a `.env.example` file containing placeholders only.
+
+Use the appropriate public Supabase URL and publishable key for browser initialization. Never expose a service-role key in the frontend.
+
+Document the environment variables required for local development and Vercel.
+
+Use the current Vercel deployment configuration appropriate for the chosen project structure.
+
+If the Google AI Studio environment does not provide access to GitHub or Supabase, do not pretend that the integration succeeded. Clearly identify the remaining connection or setup step and provide the exact required instructions.
+
+---
+
+### 21. FUNCTIONALITY AND INTERACTION REQUIREMENTS
+
+Every visible control must have a defined purpose and a working behavior.
+
+Examples:
+
+- Clicking a lead opens its profile.
+- Clicking Add Lead opens a validated form.
+- Saving a lead persists it to Supabase.
+- Clicking a pipeline stage displays the relevant opportunities.
+- Completing a task persists the status change.
+- Clicking a dashboard KPI opens the relevant filtered records.
+- Search returns actual matching records.
+- Date filters update the displayed data.
+- Navigation items open implemented routes.
+- Unauthorized actions are rejected.
+- Failed requests display useful errors.
+- Successful mutations update the relevant UI.
+- Notifications display meaningful information.
+- Forms prevent accidental duplicate submissions.
+
+Use optimistic updates only where safe and provide rollback or reconciliation behavior when a request fails.
+
+Do not implement fake buttons that simply display success messages.
+
+Do not use browser local storage as the authoritative database for CRM records.
+
+Local state is appropriate for temporary interface state, but operational data must persist in Supabase.
+
+Do not use hardcoded mock arrays as the permanent source of truth for production dashboard metrics.
+
+If seed data is needed for development, make it explicit, reproducible, and separate from production data.
+
+---
+
+### 22. RESPONSIVE DESIGN AND ACCESSIBILITY
+
+Preserve the desktop-first reference design while supporting smaller screens.
+
+Desktop:
+- Persistent sidebar
+- Dense but readable dashboard
+- Multi-column KPI and chart sections
+- Tables and activity panels
+- Clear content hierarchy
+
+Tablet:
+- Adaptable navigation
+- Responsive card grid
+- Tables that remain usable
+- Appropriate panel stacking
+
+Mobile:
+- Compact navigation or a responsive drawer
+- Readable cards
+- Forms that fit the viewport
+- Usable task controls
+- Appropriate alternatives to wide tables
+- Touch-friendly interactive elements
+
+Maintain the brand palette across breakpoints.
+
+Support keyboard navigation, semantic controls, accessible form labels, focus indicators, and appropriate contrast.
+
+Do not make the design visually cluttered in the process of making it responsive.
+
+---
+
+### 23. IMPLEMENTATION STRATEGY
+
+Work in controlled phases while maintaining a runnable application.
+
+**Phase 1: Inspect and plan**
+- Inspect the attached HTML file.
+- Identify its visual structure and components.
+- Establish the React architecture.
+- Define the initial database schema.
+- Define the role and permission model.
+- Define the core sales lifecycle.
+- Identify dependencies and environment requirements.
+
+**Phase 2: Rebuild the interface**
+- Implement the design system.
+- Recreate the dashboard.
+- Implement navigation and route structure.
+- Build reusable cards, tables, dialogs, forms, and charts.
+- Preserve the original design as closely as possible.
+
+**Phase 3: Connect Supabase**
+- Initialize the Supabase client.
+- Create version-controlled SQL migrations.
+- Implement authentication and profile handling.
+- Configure RLS policies.
+- Connect leads, contacts, tasks, programs, and dashboard data.
+
+**Phase 4: Implement CRM operations**
+- Lead creation and management.
+- Contact records.
+- Pipeline and stage transitions.
+- Activity timeline.
+- Task management.
+- Staff assignment and permissions.
+- Search and filtering.
+
+**Phase 5: Implement operational workflows**
+- Programs and enrollment.
+- Student and coach management.
+- Financial records and payment verification.
+- Audit logging.
+- Notifications and automation foundations.
+
+**Phase 6: Reports and quality assurance**
+- Implement live reporting.
+- Validate calculations.
+- Test role permissions.
+- Test database policies.
+- Test invalid and duplicate submissions.
+- Test responsive behavior.
+- Run the production build.
+
+Do not attempt to implement every module in a single unstructured component.
+
+Complete each phase with a working, maintainable result.
+
+Do not stop after Phase 2 and claim that the CRM is complete.
+
+If the environment imposes a practical limit on the amount of code that can be generated in one pass, prioritize a working foundation and continue through the remaining phases in subsequent iterations.
+
+---
+
+### 24. ACCEPTANCE CRITERIA
+
+The application is not complete merely because it looks like the reference.
+
+Use these criteria to verify the result.
+
+**Visual fidelity**
+- The attached HTML was inspected and used as the visual specification.
+- The overall layout closely matches the original.
+- The exact brand colors are used.
+- The dashboard sections are present.
+- The application is responsive.
+
+**Authentication and security**
+- Users can sign in and sign out.
+- Protected routes require authentication.
+- Permissions are enforced server-side or through RLS.
+- Sensitive operations are protected.
+- No privileged secrets are exposed in browser code.
+
+**CRM operations**
+- Leads can be created and edited.
+- Contacts and opportunities are related correctly.
+- Duplicate handling is implemented.
+- Pipeline transitions work.
+- Activities and tasks persist.
+- Search and filtering operate on real data.
+
+**Dashboard**
+- KPI values come from the database.
+- Charts use real records.
+- Date filters work.
+- Empty states are handled properly.
+- Revenue reflects verified financial records.
+
+**Business logic**
+- Active opportunities have appropriate ownership and next actions.
+- Won opportunities cannot be created merely from verbal payment promises.
+- Payment verification is authorized.
+- Enrollments are created through valid, retry-safe workflows.
+- Staff activities and important changes are auditable.
+
+**Engineering quality**
+- TypeScript is used consistently.
+- The project builds successfully.
+- No critical runtime errors remain.
+- Database migrations are available.
+- Environment configuration is documented.
+- Deployment instructions are complete.
+
+Create a practical testing checklist and report any acceptance criteria that remain incomplete. Do not claim a test passed unless it was actually run and verified.
+
+---
+
+### 25. REQUIRED FIRST RESPONSE AND EXECUTION BEHAVIOR
+
+Start by inspecting the attached `dsp_coaching_crm_ui.html` file.
+
+Then provide a concise implementation assessment containing:
+
+1. The design structure identified in the attachment.
+2. The recommended application architecture.
+3. The proposed initial database schema.
+4. The security and authentication approach.
+5. The implementation phases.
+6. Any environment setup required before proceeding.
+
+After that, begin implementing the application.
+
+Do not spend the entire response describing what you intend to build. Produce working code and a functioning application.
+
+Do not redesign the reference without a compelling technical reason.
+
+Do not silently remove features from the original layout.
+
+Do not fabricate successful integrations, deployed URLs, database records, or test results.
+
+If something requires a connection or credential that has not been configured, identify it clearly and continue implementing everything that can be completed safely.
+
+When finished, provide:
+
+- The implemented application.
+- The project structure.
+- Database migration files.
+- Required environment variables.
+- Setup instructions.
+- GitHub connection and push instructions, where not already completed.
+- Vercel deployment instructions.
+- Testing results and outstanding items.
+
+**Final objective:** Deliver a visually faithful, secure, database-backed DSP Academy Coaching CRM that preserves the attached design and turns it into a real system for lead conversion, staff accountability, revenue management, and coaching operations.
