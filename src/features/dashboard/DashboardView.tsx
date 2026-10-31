@@ -441,7 +441,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
                   let pillColor = 'bg-[#edeee8] text-black';
                   if (ld.stage === 'Qualified' || ld.stage === 'Won') pillColor = 'bg-[#e4fbd9] text-[#2f9b00]';
-                  else if (ld.stage === 'Contacted' || ld.stage === 'Contact Attempted') pillColor = 'bg-[#fff2bb] text-[#8a6800]';
+                  else if (ld.stage === 'Contact Attempted' || ld.stage === 'Contact Established') pillColor = 'bg-[#fff2bb] text-[#8a6800]';
                   else if (ld.stage === 'Offer Presented') pillColor = 'bg-[#e0f5ff] text-[#006699]';
 
                   return (

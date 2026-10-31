@@ -118,9 +118,11 @@ export const useCrmStore = () => {
     if (!isSupabaseConfigured || !supabase) return;
 
     const fetchSupabaseData = async () => {
+      const client = supabase;
+      if (!client) return;
       try {
-        const { data: leadsData } = await supabase.from('opportunities').select('*');
-        const { data: tasksData } = await supabase.from('tasks').select('*');
+        const { data: leadsData } = await client.from('opportunities').select('*');
+        const { data: tasksData } = await client.from('tasks').select('*');
         if (leadsData && leadsData.length > 0) {
           // If remote data exists, we can merge or hydrate
           console.log('Supabase opportunities loaded:', leadsData.length);
@@ -230,7 +232,7 @@ export const useCrmStore = () => {
     const prevStage = lead.stage;
     let nextAction = lead.nextAction;
 
-    if (newStage === 'Contacted' || newStage === 'Contact Established') {
+    if (newStage === 'Contact Attempted' || newStage === 'Contact Established') {
       nextAction = 'Complete qualification questionnaire';
     } else if (newStage === 'Qualified') {
       nextAction = 'Prepare coaching proposal & pricing options';

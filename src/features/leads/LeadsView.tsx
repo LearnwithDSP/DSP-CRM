@@ -130,7 +130,7 @@ export const LeadsView: React.FC<LeadsViewProps> = ({
 
                 let pillColor = 'bg-[#edeee8] text-black';
                 if (l.stage === 'Qualified' || l.stage === 'Won') pillColor = 'bg-[#e4fbd9] text-[#2f9b00]';
-                else if (l.stage === 'Contacted' || l.stage === 'Contact Attempted') pillColor = 'bg-[#fff2bb] text-[#8a6800]';
+                else if (l.stage === 'Contact Attempted' || l.stage === 'Contact Established') pillColor = 'bg-[#fff2bb] text-[#8a6800]';
                 else if (l.stage === 'Offer Presented') pillColor = 'bg-[#e0f5ff] text-[#006699]';
                 else if (l.stage === 'Lost') pillColor = 'bg-red-100 text-red-700';
 
